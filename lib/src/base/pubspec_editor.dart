@@ -205,4 +205,38 @@ class PubspecEditor {
 
     print("替换dependency_overrides成功！！！");
   }
+
+  /// 更新 image assets 节点数据
+  static void updateImageAssetsNode(String imageAssetsRootPath, String projectPubspecYamlPath) {
+    final projectPubspecYamlFile = File(projectPubspecYamlPath);
+    if (projectPubspecYamlFile.existsSync() != true) {
+      throw "项目的pubspec.yaml的文件，不存在：$projectPubspecYamlPath";
+    }
+
+    final content = projectPubspecYamlFile.readAsStringSync();
+    final yamlEditor = YamlEditor(content);
+
+    // 获取当前内容用于检查
+    final yaml = loadYaml(content);
+
+    List<DirectoryUnderFiles> imageAssetsList = readDirectoryFiles(imageAssetsRootPath);
+    imageAssetsList = imageAssetsList.where((element) => element.files.isNotEmpty).toList();
+    if (imageAssetsList.isEmpty) {
+      throw "没有图片资源：$imageAssetsRootPath";
+    }
+
+    var projectRoot = path.dirname(projectPubspecYamlPath);
+
+    // 将路径转换为相对于项目根目录的相对路径，并统一使用正斜杠
+    var relativePaths = imageAssetsList.map((element) {
+      var relative = path.relative(element.directory.path, from: projectRoot);
+      return "${path.posix.joinAll(path.split(relative))}/";
+    }).toList();
+
+    yamlEditor.update(['flutter', 'assets'], relativePaths);
+
+    projectPubspecYamlFile.writeAsStringSync(yamlEditor.toString());
+
+    print("更新 image assets 节点数据成功！！！");
+  }
 }
