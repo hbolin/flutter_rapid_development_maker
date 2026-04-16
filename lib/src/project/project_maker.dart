@@ -9,7 +9,7 @@ class ProjectMaker {
   static String flutter_rapid_development_kit_verson = "v3.1.4";
 
   /// 创建项目时，依赖flutter_rapid_development_maker的版本
-  static String flutter_rapid_development_maker_verson = "v1.0.0";
+  static String flutter_rapid_development_maker_verson = "v1.0.1";
 
   /// 生成项目
   /// [flutterPath] flutter地址
