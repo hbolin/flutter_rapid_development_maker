@@ -7,4 +7,8 @@ Future<void> main() async {
     packageName: "com.demo.example",
     needGit: true,
   );
+
+  PubspecEditor.replaceYamlDependencies("/Volumes/exmac/development2/workspace2/flutter2/dy-app-v4/pubspec.yaml", "/Volumes/exmac/Downloads/11/example/pubspec.yaml");
+  PubspecEditor.replaceYamlDevDependencies("/Volumes/exmac/development2/workspace2/flutter2/dy-app-v4/pubspec.yaml", "/Volumes/exmac/Downloads/11/example/pubspec.yaml");
+  PubspecEditor.replaceYamlDependencyOverrides("/Volumes/exmac/development2/workspace2/flutter2/dy-app-v4/pubspec.yaml", "/Volumes/exmac/Downloads/11/example/pubspec.yaml");
 }

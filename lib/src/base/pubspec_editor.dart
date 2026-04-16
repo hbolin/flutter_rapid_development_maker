@@ -130,4 +130,79 @@ class PubspecEditor {
 
     print("添加 font assets 节点数据成功！！！");
   }
+
+  /// 替换dependencies
+  static void replaceYamlDependencies(String sourceYamlPath, String targetYamlPath) {
+    // 1. 读取源文件的 dependencies 内容
+    final sourceContent = File(sourceYamlPath).readAsStringSync();
+    final sourceYaml = loadYaml(sourceContent) as YamlMap;
+    final sourceDeps = sourceYaml['dependencies'];
+
+    if (sourceDeps == null) {
+      throw "原文件中没有dependencies依赖：$sourceYamlPath";
+    }
+
+    // 2. 使用 YamlEditor 加载目标文件
+    final targetContent = File(targetYamlPath).readAsStringSync();
+    final editor = YamlEditor(targetContent);
+
+    // 3. 直接更新整个 dependencies 节点
+    // update 方法会自动处理节点不存在、缩进、以及复杂的映射关系
+    editor.update(['dependencies'], sourceDeps);
+
+    // 4. 写回文件
+    File(targetYamlPath).writeAsStringSync(editor.toString());
+
+    print("替换dependencies成功！！！");
+  }
+
+  /// 替换dev_dependencies
+  static void replaceYamlDevDependencies(String sourceYamlPath, String targetYamlPath) {
+    // 1. 读取源文件的 dependencies 内容
+    final sourceContent = File(sourceYamlPath).readAsStringSync();
+    final sourceYaml = loadYaml(sourceContent) as YamlMap;
+    final sourceDeps = sourceYaml['dev_dependencies'];
+
+    if (sourceDeps == null) {
+      throw "原文件中没有dev_dependencies依赖：$sourceYamlPath";
+    }
+
+    // 2. 使用 YamlEditor 加载目标文件
+    final targetContent = File(targetYamlPath).readAsStringSync();
+    final editor = YamlEditor(targetContent);
+
+    // 3. 直接更新整个 dependencies 节点
+    // update 方法会自动处理节点不存在、缩进、以及复杂的映射关系
+    editor.update(['dev_dependencies'], sourceDeps);
+
+    // 4. 写回文件
+    File(targetYamlPath).writeAsStringSync(editor.toString());
+
+    print("替换dev_dependencies成功！！！");
+  }
+
+  /// 替换dependency_overrides
+  static void replaceYamlDependencyOverrides(String sourceYamlPath, String targetYamlPath) {
+    // 1. 读取源文件的 dependencies 内容
+    final sourceContent = File(sourceYamlPath).readAsStringSync();
+    final sourceYaml = loadYaml(sourceContent) as YamlMap;
+    final sourceDeps = sourceYaml['dependency_overrides'];
+
+    if (sourceDeps == null) {
+      throw "原文件中没有dependency_overrides依赖：$sourceYamlPath";
+    }
+
+    // 2. 使用 YamlEditor 加载目标文件
+    final targetContent = File(targetYamlPath).readAsStringSync();
+    final editor = YamlEditor(targetContent);
+
+    // 3. 直接更新整个 dependencies 节点
+    // update 方法会自动处理节点不存在、缩进、以及复杂的映射关系
+    editor.update(['dependency_overrides'], sourceDeps);
+
+    // 4. 写回文件
+    File(targetYamlPath).writeAsStringSync(editor.toString());
+
+    print("替换dependency_overrides成功！！！");
+  }
 }
