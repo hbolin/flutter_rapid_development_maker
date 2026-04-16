@@ -20,13 +20,13 @@ class PubspecEditor {
     // 获取当前内容用于检查
     final yaml = loadYaml(content);
 
-    List<DirectoryUnderFiles> imageAssetsList = readDirectoryFiles(imageAssetsPath);
+    var projectRoot = path.dirname(projectPubspecYamlPath);
+
+    List<DirectoryUnderFiles> imageAssetsList = readDirectoryFiles(path.join(projectRoot, imageAssetsPath));
     imageAssetsList = imageAssetsList.where((element) => element.files.isNotEmpty).toList();
     if (imageAssetsList.isEmpty) {
       throw "没有图片资源：$imageAssetsPath";
     }
-
-    var projectRoot = path.dirname(projectPubspecYamlPath);
 
     // 将路径转换为相对于项目根目录的相对路径，并统一使用正斜杠
     var relativePaths = imageAssetsList.map((element) {
@@ -74,13 +74,13 @@ class PubspecEditor {
     // 获取当前内容用于检查
     final yaml = loadYaml(content);
 
-    List<DirectoryUnderFiles> fontAssetsList = readDirectoryFiles(fontAssetsPath);
+    var projectRoot = path.dirname(projectPubspecYamlPath);
+
+    List<DirectoryUnderFiles> fontAssetsList = readDirectoryFiles(path.join(projectRoot, fontAssetsPath));
     fontAssetsList = fontAssetsList.where((element) => element.files.isNotEmpty).toList();
     if (fontAssetsList.isEmpty) {
       throw "没有字体资源：$fontAssetsPath";
     }
-
-    var projectRoot = path.dirname(projectPubspecYamlPath);
 
     // 将路径转换为相对于项目根目录的相对路径，并统一使用正斜杠
     var relativePaths = fontAssetsList.expand((element) => element.files).map((element) {
@@ -216,16 +216,13 @@ class PubspecEditor {
     final content = projectPubspecYamlFile.readAsStringSync();
     final yamlEditor = YamlEditor(content);
 
-    // 获取当前内容用于检查
-    final yaml = loadYaml(content);
+    var projectRoot = path.dirname(projectPubspecYamlPath);
 
-    List<DirectoryUnderFiles> imageAssetsList = readDirectoryFiles(imageAssetsRootPath);
+    List<DirectoryUnderFiles> imageAssetsList = readDirectoryFiles(path.join(projectRoot, imageAssetsRootPath));
     imageAssetsList = imageAssetsList.where((element) => element.files.isNotEmpty).toList();
     if (imageAssetsList.isEmpty) {
       throw "没有图片资源：$imageAssetsRootPath";
     }
-
-    var projectRoot = path.dirname(projectPubspecYamlPath);
 
     // 将路径转换为相对于项目根目录的相对路径，并统一使用正斜杠
     var relativePaths = imageAssetsList.map((element) {
