@@ -6,7 +6,7 @@ import 'package:yaml_edit/yaml_edit.dart';
 
 class ProjectMaker {
   /// 创建项目时，依赖flutter_rapid_development_kit的版本
-  static String flutter_rapid_development_kit_verson = "v3.1.4";
+  static String flutter_rapid_development_kit_verson = "v3.1.5";
 
   /// 创建项目时，依赖flutter_rapid_development_maker的版本
   static String flutter_rapid_development_maker_verson = "v1.0.2";
