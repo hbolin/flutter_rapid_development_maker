@@ -61,7 +61,7 @@ class $className {
       await file.delete();
     }
     await file.create(recursive: true);
-    file.writeAsString(outData);
+    file.writeAsStringSync(outData);
     print('生成成功，生成路径：${file.path}');
 
     PubspecEditor.addFontAssetsNode(directoryPath, "${Directory.current.path}/pubspec.yaml");

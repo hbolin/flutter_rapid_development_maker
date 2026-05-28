@@ -42,7 +42,7 @@ $outData''';
       await file.delete();
     }
     await file.create(recursive: true);
-    file.writeAsString(outData);
+    file.writeAsStringSync(outData);
     print('生成成功，生成路径：${file.path}');
 
     PubspecEditor.addImageAssetsNode(directoryPath, "${Directory.current.path}/pubspec.yaml");
@@ -51,7 +51,7 @@ $outData''';
   }
 
   static String _make(Directory directory, bool isRoot, String rootClassName) {
-    var temps = directory.listSync();
+    var temps = directory.listSync(followLinks: false);
     var childDirectories = temps.where((element) => FileSystemEntity.isDirectorySync(element.path));
     var childFiles = temps.where((element) => FileSystemEntity.isFileSync(element.path));
     var className = '_${directory.directoryName.toUpperCaseFirstLetter()}';

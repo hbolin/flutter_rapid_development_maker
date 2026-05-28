@@ -6,10 +6,10 @@ import 'package:yaml_edit/yaml_edit.dart';
 
 class ProjectMaker {
   /// 创建项目时，依赖flutter_rapid_development_kit的版本
-  static String flutter_rapid_development_kit_verson = "v3.1.5";
+  static String flutter_rapid_development_kit_version = "v3.1.5";
 
   /// 创建项目时，依赖flutter_rapid_development_maker的版本
-  static String flutter_rapid_development_maker_verson = "v1.0.2";
+  static String flutter_rapid_development_maker_version = "v1.0.2";
 
   /// 生成项目
   /// [flutterPath] flutter地址
@@ -100,13 +100,13 @@ class ProjectMaker {
     yamLines.insert((yamlMap["dependencies"] as YamlMap).span.end.line, "  flutter_rapid_development_kit: ");
     yamLines.insert((yamlMap["dependencies"] as YamlMap).span.end.line + 1, "    git:");
     yamLines.insert((yamlMap["dependencies"] as YamlMap).span.end.line + 2, "      url: \"https://github.com/hbolin/flutter_rapid_development_kit\"");
-    yamLines.insert((yamlMap["dependencies"] as YamlMap).span.end.line + 3, "      ref: \"$flutter_rapid_development_kit_verson\"");
+    yamLines.insert((yamlMap["dependencies"] as YamlMap).span.end.line + 3, "      ref: \"$flutter_rapid_development_kit_version\"");
     yamLines.insert((yamlMap["dependencies"] as YamlMap).span.end.line + 4, "");
 
     yamLines.insert((yamlMap["dev_dependencies"] as YamlMap).span.end.line, "\n  flutter_rapid_development_maker: ");
     yamLines.insert((yamlMap["dev_dependencies"] as YamlMap).span.end.line + 1, "    git:");
     yamLines.insert((yamlMap["dev_dependencies"] as YamlMap).span.end.line + 2, "      url: \"https://github.com/hbolin/flutter_rapid_development_maker\"");
-    yamLines.insert((yamlMap["dev_dependencies"] as YamlMap).span.end.line + 3, "      ref: \"$flutter_rapid_development_maker_verson\"");
+    yamLines.insert((yamlMap["dev_dependencies"] as YamlMap).span.end.line + 3, "      ref: \"$flutter_rapid_development_maker_version\"");
 
     // print(yamLines.join("\n"));
     File(yamlFilePath).writeAsStringSync(yamLines.join("\n"));
@@ -118,9 +118,6 @@ class ProjectMaker {
     if (!mainDartFile.existsSync()) {
       throw "main.dart文件不存在";
     }
-
-    /// 需要生成的app的目录地址
-    String targetProjectName = packageName.split(".").last;
 
     List<String> mainDartFileContentLines = mainDartFile.readAsLinesSync();
     int homeLineIndex = mainDartFileContentLines.indexWhere((e) => e.startsWith("      home: "));

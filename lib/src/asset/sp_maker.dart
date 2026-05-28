@@ -38,7 +38,7 @@ class ${modelClassName}Util {
 
   static Future<void> clear$modelClassName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_key, "");
+    await prefs.remove(_key);
   }
 }''';
   }
